@@ -17,11 +17,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" tabindex="-1">
-                        <select src="../Data/menu.png" alt="Menu">
-                            <option value="Login">Login</option>
-                            <option value="Register">Register</option>
-                            <!-- <option value="Log out">Log out</option>  Will add once database is added-->
-                        </select>
+                        <img src="../Data/menu.png" alt="Menu">
                     </a>
                 </li>
             </ul>
