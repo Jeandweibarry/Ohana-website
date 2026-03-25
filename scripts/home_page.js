@@ -23,8 +23,8 @@ if (contactForm) {
 
 // Add animation on scroll
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.3,
+    rootMargin: '-150px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver(function (entries) {
@@ -32,6 +32,10 @@ const observer = new IntersectionObserver(function (entries) {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+        }        
+        if (!(entry.isIntersecting)) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(1)';
         }
     });
 }, observerOptions);
@@ -42,3 +46,20 @@ document.querySelectorAll('.service-card').forEach(card => {
     card.style.transition = 'opacity 0.5s, transform 0.5s';
     observer.observe(card);
 });
+
+// Map initialization function for Google Maps API
+function initMap() {
+  const myLatLng = { lat: -34.397, lng: 150.644 };
+
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 8, // Initial zoom level
+    center: myLatLng,
+  });
+
+  // Marker
+  new google.maps.Marker({
+    position: myLatLng,
+    map,
+    title: "Testing",
+  });
+}
