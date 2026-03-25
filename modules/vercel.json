@@ -1,11 +1,6 @@
-{  
-  "functions": {
-    "/pages/index.php": {
-      "runtime": "vercel-php@0.8.5"
-    }
-  },
+{
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/pages/index.php" }
+    { "src": "/.*", "dest": "pages/index.html" }
   ]
 }
