@@ -54,20 +54,20 @@ body {
     color: #3498db;
 }
 
-/* Hero Section */
-.hero {
+/* Home Section */
+.home {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 100px 0;
     text-align: center;
 }
 
-.hero h1 {
+.home h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.hero p {
+.home p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
@@ -181,7 +181,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hero h1 {
+    .home h1 {
         font-size: 2rem;
     }
 

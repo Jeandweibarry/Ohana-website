@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Ohana website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -11,7 +11,6 @@
             <div class="logo">Ohana</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -19,7 +18,7 @@
     </nav>
 
     <!-- Title Section -->
-    <section id="hero" class="hero">
+    <section id="home" class="home">
         <div class="container">
             <h1>Ohana</h1>
             <p>Places where lives becomes for one another</p>
@@ -106,6 +105,6 @@
         </div>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="../scripts/scripts.js"></script>
 </body>
 </html>
