@@ -1,6 +1,13 @@
 {
+  "version": 2,
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/pages/index.html" }
+    {
+      "src": "/resources/(.*)",
+      "dest": "/resources/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
   ]
 }

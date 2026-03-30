@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Ohana Web Reservation</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/style.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo"><span>Ohana</span> Web Reservation</a>
+                
+                <nav class="nav-main">
+                    <a href="#listings">Browse Homes</a>
+                    <a href="#story">How It Works</a>
+                    <a href="#host">Become a Host</a>
+                    <a href="#contact">Help Center</a>
+                    <a href="#contact" class="nav-cta" id="signupBtn">Sign In</a>
+                </nav>
+                
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">×</button>
+        <ul class="mobile-nav-links">
+            <li><a href="#listings">Browse Homes</a></li>
+            <li><a href="#story">How It Works</a></li>
+            <li><a href="#host">Become a Host</a></li>
+            <li><a href="#contact">Help Center</a></li>
+        </ul>
+        <div class="mobile-nav-cta">
+            <a href="#contact" class="btn-primary">Book Appointment</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="text-label hero-tagline">Find Your Perfect Stay</p>
+            <h1 class="heading-display hero-title">
+                Unique Homes &<br>Experiences <em>Worldwide</em>
+            </h1>
+            <p class="text-body hero-description">
+                Discover millions of unique accommodations from local hosts. 
+                Whether you're looking for a cozy cabin, a luxury villa, 
+                or an urban apartment, find the perfect place for your next adventure.
+            </p>
+            <div class="hero-actions">
+                <a href="#listings" class="btn-primary">Browse Listings</a>
+                <a href="#story" class="btn-text">How It Works</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-slide active" data-title="Mountain Cabin" data-price="From ₱4,500/night">
+                <img src="../resources/images/maison-hero-01.jpg" 
+                     alt="Cozy mountain cabin retreat">
+            </div>
+            <div class="hero-slide" data-title="Beachfront Villa" data-price="From ₱12,500/night">
+                <img src="../resources/images/maison-hero-02.jpg" 
+                     alt="Luxury beachfront villa">
+            </div>
+            <div class="hero-slide" data-title="City Loft" data-price="From ₱6,000/night">
+                <img src="../resources/images/maison-hero-03.jpg" 
+                     alt="Modern city loft apartment">
+            </div>
+            <div class="hero-image-overlay">
+                <p class="overlay-title" id="heroTitle">Mountain Cabin</p>
+                <p class="overlay-price" id="heroPrice">From ₱4,500/night</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Listing -->
+    <section class="featured-piece">
+        <div class="container">
+            <div class="featured-grid">
+                <div class="featured-image-wrapper">
+                    <div class="featured-image">
+                        <img src="../resources/images/maison-hero-02.jpg" 
+                             alt="Stunning beachfront villa">
+                    </div>
+                    <div class="featured-badge">Superhost</div>
+                </div>
+                <div class="featured-content">
+                    <p class="text-label featured-label">Featured Listing</p>
+                    <h2 class="heading-display featured-title">
+                        Paradise Beach Villa
+                    </h2>
+                    <p class="text-body featured-description">
+                        Wake up to stunning ocean views in this luxurious 4-bedroom 
+                        villa. Perfect for families or groups, featuring a private 
+                        pool, modern kitchen, and direct beach access. Hosted by 
+                        Maria, a verified Superhost with 5-star reviews.
+                    </p>
+                    <div class="featured-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Location</span>
+                            <span class="detail-value">Maui, Hawaii</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Guests</span>
+                            <span class="detail-value">Up to 8 people</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.9 ★ (127 reviews)</span>
+                        </div>
+                    </div>
+                    <p class="featured-price">₱14,000/night</p>
+                    <button type="button" id="bookNowBtn" class="btn-primary">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Browse Listings -->
+    <section class="collections" id="listings">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <h2 class="heading-display section-title">Browse by Type</h2>
+                    <p class="text-body section-subtitle">
+                        Find the perfect accommodation for your travel style
+                    </p>
+                </div>
+                <button type="button" id="viewAllListingsBtn" class="btn-text">View All Listings</button>
+            </div>
+            
+            <div class="collections-grid">
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="../resources/images/maison-hero-03.jpg" 
+                             alt="Entire homes and apartments">
+                    </div>
+                    <div class="collection-overlay">
+                        <h3 class="collection-name">Entire Homes</h3>
+                        <p class="collection-count">850+ listings</p>
+                    </div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="../resources/images/maison-doree-01.jpg" 
+                             alt="Unique stays and experiences">
+                    </div>
+                    <div class="collection-overlay">
+                        <h3 class="collection-name">Unique Stays</h3>
+                        <p class="collection-count">420+ listings</p>
+                    </div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="../resources/images/maison-doree-02.jpg" 
+                             alt="Cabins and cottages">
+                    </div>
+                    <div class="collection-overlay">
+                        <h3 class="collection-name">Cabins & Cottages</h3>
+                        <p class="collection-count">280+ listings</p>
+                    </div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="../resources/images/maison-doree-03.jpg" 
+                             alt="Luxury retreats">
+                    </div>
+                    <div class="collection-overlay">
+                        <h3 class="collection-name">Luxury Retreats</h3>
+                        <p class="collection-count">150+ listings</p>
+                    </div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="../resources/images/maison-doree-04.jpg" 
+                             alt="Pet-friendly homes">
+                    </div>
+                    <div class="collection-overlay">
+                        <h3 class="collection-name">Pet Friendly</h3>
+                        <p class="collection-count">320+ listings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section class="story" id="story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-content">
+                    <p class="text-label story-label">How It Works</p>
+                    <h2 class="heading-display story-title">
+                        Connecting Travelers with Local Hosts
+                    </h2>
+                    <p class="text-body story-text">
+                        Ohana was founded in 2010 with a simple mission: to create 
+                        a world where anyone can belong anywhere. We believe that 
+                        people who travel should have the freedom to experience 
+                        places like locals do, and hosts should have the opportunity 
+                        to earn income by sharing their spaces.
+                    </p>
+                    <p class="text-body story-text">
+                        Today, millions of hosts and travelers choose Ohana to 
+                        create unforgettable experiences. Whether you're looking 
+                        for a weekend getaway or planning your next big adventure, 
+                        our platform connects you with unique accommodations 
+                        around the globe.
+                    </p>
+                    <!--
+                    <div class="story-signature">
+                        <p class="signature-name">Sarah Chen</p>
+                        <p class="signature-title">Co-Founder & CEO</p>
+                    </div>
+                    -->
+                </div>
+                <div class="story-images">
+                    <div class="story-image">
+                        <img src="../resources/images/maison-doree-05.jpg" 
+                             alt="Happy travelers meeting their hosts">
+                    </div>
+                    <div class="story-image">
+                        <img src="../resources/images/maison-doree-06.jpg" 
+                             alt="Diverse accommodation options worldwide">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Become a Host -->
+    <section class="craftsmanship" id="host">
+        <div class="container">
+            <div class="craft-grid">
+                <div class="craft-content">
+                    <p class="text-label">Earn Money Hosting</p>
+                    <h2 class="heading-display craft-title">
+                        Share Your Space, Create Connections
+                    </h2>
+                    <p class="text-body craft-text">
+                        Turn your extra space into extra income. Whether you have 
+                        a spare room, an entire home, or a unique property, 
+                        Ohana makes it easy to start hosting and welcoming 
+                        travelers from around the world.
+                    </p>
+                    <ul class="craft-list text-body">
+                        <li>Set your own schedule and pricing</li>
+                        <li>Get paid securely through our platform</li>
+                        <li>Access to millions of potential guests</li>
+                        <li>Dedicated support from our host success team</li>
+                    </ul>
+                    <button type="button" id="startHostingBtn" class="btn-primary">Start Hosting Today</button>
+                </div>
+                <div class="craft-image-wrapper">
+                    <div class="craft-image">
+                        <img src="../resources/images/maison-doree-07.jpg" 
+                             alt="Hosts welcoming guests to their homes">
+                    </div>
+                    <div class="craft-stats">
+                        <div class="stat-item">
+                            <p class="stat-number">2K+</p>
+                            <p class="stat-label">Active Users</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-number">850+</p>
+                            <p class="stat-label">Listed Accommodations</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-number">₱250k+</p>
+                            <p class="stat-label">Paid to Hosts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <p class="text-label">Guest Experiences</p>
+                <h2 class="heading-display testimonials-title">Loved by Travelers</h2>
+                <p class="text-body testimonials-subtitle">What our guests say about their Ohana experiences</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "The beachfront villa we stayed in was absolutely perfect. The host was incredibly welcoming and the location was stunning. Felt like a true local experience!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="../resources/images/avatar-01.jpg" alt="Maria Santos">
+                        </div>
+                        <div class="testimonial-info">
+                            <p class="testimonial-name">Maria S.</p>
+                            <p class="testimonial-detail">Bacoor, Cavite</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a host, Ohana has been amazing. The platform is easy to use and I've met wonderful guests from all over. The support team is always helpful too."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="../resources/images/avatar-02.jpg" alt="Carlos Mendoza">
+                        </div>
+                        <div class="testimonial-info">
+                            <p class="testimonial-name">Carlos M.</p>
+                            <p class="testimonial-detail">Host • SJDM, Bulacan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "Found the most charming cabin in the mountains through Ohana. The photos were accurate and the host's recommendations made our trip unforgettable. Highly recommend!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="../resources/images/avatar-03.jpg" alt="Anna Reyes">
+                        </div>
+                        <div class="testimonial-info">
+                            <p class="testimonial-name">Anna R.</p>
+                            <p class="testimonial-detail">Quezon City, Metro Manila</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-content">
+                    <p class="text-label">Get in Touch</p>
+                    <h2 class="heading-display contact-title">
+                        We're Here to Help
+                    </h2>
+                    <p class="text-body contact-text">
+                        Have questions about booking, hosting, or need support? 
+                        Our customer service team is available 24/7 to assist you. 
+                        Get started with your next adventure today.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <p class="contact-item-label">Headquarters</p>
+                            <p class="contact-item-value">
+                                123 Makati Avenue, BGC<br>
+                                Taguig City, Metro Manila 1634
+                            </p>
+                        </div>
+                        <div class="contact-item">
+                            <p class="contact-item-label">Support Hours</p>
+                            <p class="contact-item-value">
+                                24/7 Customer Support
+                            </p>
+                        </div>
+                        <div class="contact-item">
+                            <p class="contact-item-label">Contact</p>
+                            <p class="contact-item-value">
+                                <a href="tel:+63288881234">+63 (2) 8888-1234</a><br>
+                                <a href="mailto:help@ohanarental-web.ph">help@ohanarental-web.ph</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <h3 class="form-title">Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">How can we help?</label>
+                            <textarea id="message" name="message" class="form-textarea" 
+                                placeholder="Questions about booking? Hosting inquiries? General feedback?"></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand & Contact -->
+                <div class="footer-brand">
+                    <p class="footer-logo"><span>Ohana</span> Web Reservation</p>
+                    <p class="footer-tagline">
+                        Connecting travelers with unique accommodations across the Philippines. 
+                        Find your perfect stay with local hosts.
+                    </p>
+                    <div class="footer-contact-info">
+                        <p>123 Makati Avenue, BGC</p>
+                        <p>Taguig City, Metro Manila 1634</p>
+                        <p><a href="tel:+63288881234">+63 (2) 8888-1234</a></p>
+                        <p><a href="mailto:help@ohana.ph">help@ohana.ph</a></p>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Browse</h4>
+                    <ul class="footer-links">
+                        <li><a href="#listings">All Listings</a></li>
+                        <li><a href="#">Entire Homes</a></li>
+                        <li><a href="#">Unique Stays</a></li>
+                        <li><a href="#">Cabins & Cottages</a></li>
+                        <li><a href="#">Pet Friendly</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Company -->
+                <div class="footer-column">
+                    <h4 class="footer-column-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#story">How It Works</a></li>
+                        <li><a href="#host">Become a Host</a></li>
+                        <li><a href="#contact">Help Center</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Support -->
+                <div class="footer-column footer-about">
+                    <h4 class="footer-column-title">Support</h4>
+                    <p>
+                        24/7 customer support available in English and Filipino.
+                    </p>
+                    <p>
+                        <a href="#contact">Contact Us</a> • <a href="#">Trust & Safety</a>
+                    </p>
+                    <p>
+                        <a href="#">Host Resources</a> • <a href="#">Community</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Ohana Web Reservation. Connecting travelers across the Philippines.</p>
+                <div class="footer-social">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your Ohana account</p>
+                
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Sign In</button>
+                </form>
+                
+                <p class="auth-switch">
+                    Don't have an account? 
+                    <a href="#" id="showSignup">Sign up</a>
+                </p>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form">
+                <h2>Join Ohana</h2>
+                <p>Create your account to start booking or hosting</p>
+                
+                <form id="signupFormElement">
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" name="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required minlength="8">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signupConfirmPassword" name="confirmPassword" required minlength="8">
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Create Account</button>
+                </form>
+                
+                <p class="auth-switch">
+                    Already have an account? 
+                    <a href="#" id="showLogin">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/resources/JS/home_login.js"></script>
+</body>
+</html>
