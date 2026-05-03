@@ -1,13 +1,36 @@
 {
-  "version": 2,
-  "routes": [
+  "buildCommand": "node build.js",
+  "outputDirectory": ".",
+  
+  "cleanUrls": true,
+  "rewrites": [
     {
-      "src": "/resources/(.*)",
-      "dest": "/resources/$1"
+      "source": "/dashboard",
+      "destination": "/resources/html/dashboard"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
+      "source": "/listing_details",
+      "destination": "/resources/html/listing_details"
+    },
+    {
+      "source": "/account_settings",
+      "destination": "/resources/html/account_settings"
+    },
+    {
+      "source": "/messages",
+      "destination": "/resources/html/messages"
+    },
+    {
+      "source": "/advanced_search",
+      "destination": "/resources/html/advanced_search"
+    },
+    {
+      "source": "/booking_section",
+      "destination": "/resources/html/booking_section"
+    },
+    {
+      "source": "/host_details",
+      "destination": "/resources/html/host_details"
     }
   ]
 }

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../images/logo_no_text.png">
+<title>Find Your Perfect Stay - Ohana Web Reservation</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+
+/* ================= GLOBAL ================= */
+html, body{
+    height:100%;
+    margin:0;
+}
+
+body{
+    font-family:DM Sans;
+    background:#eef4fc;
+    padding-top:90px; /* FIX HEADER OVERLAP */
+    display:flex;
+    flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+#commonHeader{
+    position:relative;
+}
+
+/* ================= SEARCH ================= */
+.hero-search{
+    padding:5rem;
+    text-align:center;
+    background: #162d6b;
+    transition:all 0.3s ease;
+}
+
+.hero-search.search-top{
+    padding:3rem;
+    position:sticky;
+    top:90px;
+    z-index:100;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-box{
+    margin:auto;
+    background: white;
+    padding:2rem;
+    border-radius:20px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+    gap:10px;
+    max-width:1000px;
+    width:95%;
+}
+
+@media (max-width:1024px){
+    .search-box{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+        padding:1.5rem;
+    }
+}
+
+@media (max-width:768px){
+    .search-box{
+        grid-template-columns:1fr;
+        gap:8px;
+        padding:1rem;
+    }
+}
+
+.hero-search h1{
+    color:white;
+    margin-bottom:1.5rem;
+}
+
+.search-box input{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #FEFCF9;
+    background-color:transparent;
+}
+
+/* BUTTON */
+.btn{
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+}
+
+.btn:hover{
+    background:#1a2d6a;
+    transform:scale(1.05);
+}
+
+.btn.loading{
+    animation:btnPulse 0.6s ease-in-out;
+    opacity:0.8;
+}
+
+@keyframes btnPulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.1);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* ================= CLEAN DROPDOWN ================= */
+.dropdown-wrapper{
+    position:relative;
+}
+
+/* input + arrow */
+.place-input{
+    width:100%;
+    padding:12px 35px 12px 12px;
+    border-radius:10px;
+    border:1px solid #FEFCF9;
+    background-color:transparent;
+}
+
+/* arrow icon restored */
+.dropdown-arrow{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    pointer-events:none;
+    font-size:12px;
+    color:#555;
+}
+
+/* dropdown box */
+.dropdown{
+    position:absolute;
+    width:100%;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:10px;
+    max-height:220px;
+    overflow:auto;
+    display:none;
+    z-index:999;
+    margin-top:5px;
+}
+
+.dropdown div{
+    padding:10px;
+    cursor:pointer;
+}
+
+.dropdown div:hover{
+    background:#f0f0f0;
+}
+
+/* ================= MAIN ================= */
+.layout{
+    display:none;
+    grid-template-columns:320px 1fr 320px;
+    gap:15px;
+    padding:1rem;
+    flex:1;
+}
+
+/* ================= FILTER ================= */
+.filter{
+    background:white;
+    border-radius:16px;
+    padding:1rem;
+    height:100%;
+    overflow:auto;
+}
+
+/* ================= RANGE ================= */
+.range-container{
+    position:relative;
+    height:40px;
+}
+
+.range-container input{
+    position:absolute;
+    width:100%;
+    pointer-events:none;
+    -webkit-appearance:none;
+    background:none;
+}
+
+input[type=range]::-webkit-slider-thumb{
+    pointer-events:all;
+    height:16px;
+    width:16px;
+    border-radius:50%;
+    background:#1e3a8a;
+    cursor:pointer;
+}
+
+.range-track{
+    position:absolute;
+    top:50%;
+    width:100%;
+    height:4px;
+    background:#ddd;
+    transform:translateY(-50%);
+    border-radius:999px;
+}
+
+.range-fill{
+    position:absolute;
+    height:4px;
+    background:#1e3a8a;
+    top:50%;
+    transform:translateY(-50%);
+    border-radius:999px;
+}
+
+/* ================= LISTINGS ================= */
+.listings{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+/* ================= MAP ================= */
+#map{
+    height:85vh;
+    border-radius:16px;
+}
+
+/* ================= ERROR MESSAGE ================= */
+.error-message{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:white;
+    border:2px solid #e74c3c;
+    border-radius:10px;
+    padding:2rem;
+    text-align:center;
+    z-index:9999;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    max-width:300px;
+}
+
+.error-message.show{
+    display:block;
+}
+
+.error-message p{
+    color:#e74c3c;
+    margin:0 0 1rem 0;
+    font-weight:500;
+}
+
+.error-close-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.error-close-btn:hover{
+    background:#c0392b;
+}
+
+.error-overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,0.3);
+    z-index:9998;
+}
+
+.error-overlay.show{
+    display:block;
+}
+
+/* ================= FOOTER ================= */
+.site-footer{
+    background:#162d6b;
+    color:white;
+    text-align:center;
+    padding:2rem;
+    margin-top:auto;
+}
+
+/* ================= MOBILE PROFILE ================= */
+.mobile-profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.mobile-profile-pic{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.mobile-profile-info{
+    flex:1;
+}
+
+.mobile-username{
+    font-weight:600;
+    margin:0;
+    font-size:14px;
+    color:#1C1C1C;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="site-header" id="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="#" class="logo"><span>ohana</span> Web Reservation</a>
+            <nav class="nav-main">
+                <a href ="#" id="userGreeting">Welcome, Username</a>
+                
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <a><img src="/resources/images/default_pic.jpg" id="user_pic"></a>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Navigation -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose">×</button>
+    
+    <!-- Mobile Profile -->
+    <div class="mobile-profile">
+        <img src="/resources/images/default_pic.jpg" class="mobile-profile-pic" id="mobile_user_pic">
+        <div class="mobile-profile-info">
+            <p class="mobile-username" id="mobile_username">Username</p>
+        </div>
+    </div>
+    
+    <ul class="mobile-nav-links">
+        <li><a href="#listings">Browse Homes</a></li>
+        <li><a href="#contact">Help Center</a></li>
+        <a href ="#account">Account Settings</a>
+    </ul>
+    <div class="mobile-nav-cta">
+        <a href="#" class="btn-primary" id="logoutBtn">Log Out</a>
+    </div>
+</nav>
+
+<!-- SEARCH -->
+<div class="hero-search">
+
+    <h1>Find Your Perfect Stay</h1>
+
+    <div class="search-box">
+
+        <!-- PLACE DROPDOWN FIXED -->
+        <div class="dropdown-wrapper">
+
+            <input id="place"
+                   class="place-input"
+                   placeholder="Where are you going?"
+                   autocomplete="off"
+                   oninput="filterCities()"
+                   onfocus="showCities()">
+
+            <div class="dropdown-arrow">▼</div>
+
+            <div id="cityDropdown" class="dropdown"></div>
+
+        </div>
+
+        <input type="date" id="checkin">
+        <input type="date" id="checkout">
+        <input type="number" id="guests" value="1" min="1">
+
+        <button class="btn" onclick="runSearch()">Search</button>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="layout" id="layout">
+
+<!-- FILTER -->
+<div class="filter">
+
+    <h3>Filters</h3>
+
+    <!-- BUDGET -->
+    <div class="filter-section">
+        <p>Budget</p>
+
+        <div class="range-container">
+            <div class="range-track"></div>
+            <div class="range-fill" id="fill"></div>
+
+            <input type="range" id="min" min="0" max="35000" value="0">
+            <input type="range" id="max" min="0" max="35000" value="35000">
+        </div>
+
+        <small>₱<span id="minV">0</span> - ₱<span id="maxV">34,967</span></small>
+    </div>
+
+    <!-- YOUR FILTERS (UNCHANGED) -->
+    <div class="filter-section">
+        <div class="filter-title">Star rating</div>
+        <label><input type="checkbox"> 5 stars</label><br>
+        <label><input type="checkbox"> 4 stars</label><br>
+        <label><input type="checkbox"> 3 stars</label><br>
+        <label><input type="checkbox"> 2 stars</label><br>
+        <label><input type="checkbox"> 1 star</label>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-title">Booking features</div>
+        <label><input type="checkbox"> Free cancellation</label><br>
+        <label><input type="checkbox"> Instant confirmation</label>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-title">Property type</div>
+        <label><input type="checkbox"> Apartment</label><br>
+        <label><input type="checkbox"> Hotel</label><br>
+        <label><input type="checkbox"> Villa</label><br>
+        <label><input type="checkbox"> Hostel</label>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-title">Neighborhood (Davao)</div>
+        <label><input type="checkbox"> Poblacion</label><br>
+        <label><input type="checkbox"> Buhangin</label><br>
+        <label><input type="checkbox"> Ecoland</label><br>
+        <label><input type="checkbox"> Agdao</label><br>
+        <label><input type="checkbox"> Lanang</label>
+    </div>
+
+</div>
+
+<!-- LISTINGS -->
+<div class="listings">
+    <!-- 5 Star Listings -->
+    <div class="card" data-price="4500" data-rating="5" data-type="cottage" data-features="free-cancel" data-neighborhood="poblacion">
+        <img src="https://picsum.photos/400/300?1">
+        <h3>Lakeview Cottage</h3>
+        <p>₱4,500/night</p>
+    </div>
+
+    <div class="card" data-price="8000" data-rating="5" data-type="apartment" data-features="instant-confirm" data-neighborhood="buhangin">
+        <img src="https://picsum.photos/400/300?2">
+        <h3>Luxury Downtown Apt</h3>
+        <p>₱8,000/night</p>
+    </div>
+
+    <!-- 4 Star Listings -->
+    <div class="card" data-price="12000" data-rating="4" data-type="villa" data-features="instant-confirm" data-neighborhood="lanang">
+        <img src="https://picsum.photos/400/300?3">
+        <h3>Beach Villa</h3>
+        <p>₱12,000/night</p>
+    </div>
+
+    <div class="card" data-price="6000" data-rating="4" data-type="hotel" data-features="free-cancel" data-neighborhood="ecoland">
+        <img src="https://picsum.photos/400/300?4">
+        <h3>Ecoland Resort</h3>
+        <p>₱6,000/night</p>
+    </div>
+
+    <!-- 3 Star Listings -->
+    <div class="card" data-price="3500" data-rating="3" data-type="hostel" data-features="free-cancel" data-neighborhood="agdao">
+        <img src="https://picsum.photos/400/300?5">
+        <h3>Budget Hostel</h3>
+        <p>₱3,500/night</p>
+    </div>
+
+    <div class="card" data-price="5500" data-rating="3" data-type="apartment" data-features="instant-confirm" data-neighborhood="poblacion">
+        <img src="https://picsum.photos/400/300?6">
+        <h3>Cozy Studio</h3>
+        <p>₱5,500/night</p>
+    </div>
+
+    <!-- 2 Star Listings -->
+    <div class="card" data-price="2800" data-rating="2" data-type="hostel" data-features="instant-confirm" data-neighborhood="buhangin">
+        <img src="https://picsum.photos/400/300?7">
+        <h3>Simple Lodging</h3>
+        <p>₱2,800/night</p>
+    </div>
+
+    <div class="card" data-price="7200" data-rating="2" data-type="hotel" data-features="free-cancel" data-neighborhood="lanang">
+        <img src="https://picsum.photos/400/300?8">
+        <h3>Lanang Hotel</h3>
+        <p>₱7,200/night</p>
+    </div>
+
+    <!-- 1 Star Listings -->
+    <div class="card" data-price="2000" data-rating="1" data-type="hostel" data-features="free-cancel" data-neighborhood="ecoland">
+        <img src="https://picsum.photos/400/300?9">
+        <h3>Economy Stay</h3>
+        <p>₱2,000/night</p>
+    </div>
+
+    <div class="card" data-price="9500" data-rating="1" data-type="villa" data-features="instant-confirm" data-neighborhood="agdao">
+        <img src="https://picsum.photos/400/300?10">
+        <h3>Agdao Villa</h3>
+        <p>₱9,500/night</p>
+    </div>
+
+</div>
+
+<!-- MAP -->
+<div id="map"></div>
+
+</div>
+
+<!-- ERROR MESSAGE MODAL -->
+<div class="error-overlay" id="errorOverlay"></div>
+<div class="error-message" id="errorMessage">
+    <p id="errorText"></p>
+    <button class="error-close-btn" onclick="closeError()">OK</button>
+</div>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-content">
+                <p class="text-label">Get in Touch</p>
+                <h2 class="heading-display contact-title">
+                    We're Here to Help
+                </h2>
+                <p class="text-body contact-text">
+                    Have questions about booking, hosting, or need support? 
+                    Our customer service team is available 24/7 to assist you. 
+                    Get started with your next adventure today.
+                </p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <p class="contact-item-label">Headquarters</p>
+                        <p class="contact-item-value">
+                            123 Makati Avenue, BGC<br>
+                            Taguig City, Metro Manila 1634
+                        </p>
+                    </div>
+                    <div class="contact-item">
+                        <p class="contact-item-label">Support Hours</p>
+                        <p class="contact-item-value">
+                            24/7 Customer Support
+                        </p>
+                    </div>
+                    <div class="contact-item">
+                        <p class="contact-item-label">Contact</p>
+                        <p class="contact-item-value">
+                            <a href="tel:+63288881234">+63 (2) 8888-1234</a><br>
+                            <a href="mailto:help@ohanarental-web.ph">help@ohanarental-web.ph</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <h3 class="form-title">Send us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">How can we help?</label>
+                        <textarea id="message" name="message" class="form-textarea" 
+                            placeholder="Questions about booking? Hosting inquiries? General feedback?"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <p class="footer-logo"><span>ohana</span> Web Reservation</p>
+                <p class="footer-tagline">
+                    Connecting travelers with unique accommodations across the Philippines. 
+                    Find your perfect stay with local hosts.
+                </p>
+                <div class="footer-contact-info">
+                    <p>123 Makati Avenue, BGC</p>
+                    <p>Taguig City, Metro Manila 1634</p>
+                    <p><a href="tel:+63288881234">+63 (2) 8888-1234</a></p>
+                    <p><a href="mailto:help@ohana.ph">help@ohana.ph</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-column-title">Browse</h4>
+                <ul class="footer-links">
+                    <li><a href="#listings">All Listings</a></li>
+                    <li><a href="#">Entire Homes</a></li>
+                    <li><a href="#">Unique Stays</a></li>
+                    <li><a href="#">Cabins & Cottages</a></li>
+                    <li><a href="#">Pet Friendly</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="footer-column-title">Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#story">How It Works</a></li>
+                    <li><a href="#host">Become a Host</a></li>
+                    <li><a href="#contact">Help Center</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column footer-about">
+                <h4 class="footer-column-title">Support</h4>
+                <p>
+                    24/7 customer support available in English and Filipino.
+                </p>
+                <p>
+                    <a href="#contact">Contact Us</a> • <a href="#">Trust & Safety</a>
+                </p>
+                <p>
+                    <a href="#">Host Resources</a> • <a href="#">Community</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2026 Ohana Web Reservation. Connecting travelers across the Philippines.</p>
+            <div class="footer-social">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="logoutModal">
+    <div class="modal-content">
+        <h3>Ready to leave?</h3>
+        <p>Are you sure you want to log out of your account?</p>
+        <div class="modal-actions">
+            <button class="btn-primary" id="cancelLogoutBtn">Cancel</button>
+            <button class="btn-primary" id="confirmLogoutBtn">Log Out</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+/* ERROR MESSAGE FUNCTIONS */
+function showError(message){
+    document.getElementById("errorOverlay").classList.add("show");
+    document.getElementById("errorMessage").classList.add("show");
+    document.getElementById("errorText").textContent = message;
+}
+
+function closeError(){
+    document.getElementById("errorOverlay").classList.remove("show");
+    document.getElementById("errorMessage").classList.remove("show");
+}
+
+/* SEARCH VALIDATION */
+function runSearch(){
+    let place = document.getElementById("place").value.trim();
+    let searchBtn = event.target;
+    
+    // Add animation
+    searchBtn.classList.add("loading");
+    
+    if(place === ""){
+        showError("Please select a place first.");
+        searchBtn.classList.remove("loading");
+        return;
+    }
+    document.getElementById("layout").style.display="grid";
+    document.querySelector(".hero-search").classList.add("search-top");
+    closeError();
+    
+    // Remove animation after it completes
+    setTimeout(() => {
+        searchBtn.classList.remove("loading");
+    }, 600);
+}
+
+/* CITIES */
+const cities = [
+"Manila","Quezon City","Cebu City","Davao City",
+"Tagaytay","Baguio","Boracay","Palawan"
+];
+
+const input = document.getElementById("place");
+const dropdown = document.getElementById("cityDropdown");
+
+function showCities(){
+    dropdown.style.display="block";
+    renderCities(cities);
+}
+
+function filterCities(){
+    let val = input.value.toLowerCase();
+    let filtered = cities.filter(c => c.toLowerCase().includes(val));
+    renderCities(filtered);
+    dropdown.style.display="block";
+}
+
+function renderCities(list){
+    dropdown.innerHTML = list.map(c =>
+        `<div onclick="selectCity('${c}')">${c}</div>`
+    ).join("");
+}
+
+function selectCity(city){
+    input.value = city;
+    dropdown.style.display="none";
+}
+
+document.addEventListener("click",(e)=>{
+    if(!e.target.closest(".dropdown-wrapper")){
+        dropdown.style.display="none";
+    }
+});
+
+/* DATE AUTO SET */
+function setDates(){
+    let today = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+1);
+
+    document.getElementById("checkin").value = today.toISOString().split("T")[0];
+    document.getElementById("checkout").value = tomorrow.toISOString().split("T")[0];
+}
+setDates();
+
+/* RANGE SLIDER */
+const min=document.getElementById("min");
+const max=document.getElementById("max");
+const minV=document.getElementById("minV");
+const maxV=document.getElementById("maxV");
+const fill=document.getElementById("fill");
+
+function update(){
+    if(+min.value > +max.value){
+        [min.value,max.value]=[max.value,min.value];
+    }
+
+    minV.textContent=min.value;
+    maxV.textContent=max.value;
+
+    let p1=(min.value/35000)*100;
+    let p2=(max.value/35000)*100;
+
+    fill.style.left=p1+"%";
+    fill.style.width=(p2-p1)+"%";
+    
+    // Apply filters when range changes
+    filterListings();
+}
+
+min.oninput=max.oninput=update;
+update();
+
+/* FILTER LISTINGS FUNCTION */
+function filterListings(){
+    const minPrice = parseInt(document.getElementById("min").value);
+    const maxPrice = parseInt(document.getElementById("max").value);
+    
+    // Get all filter sections
+    const filterSections = document.querySelectorAll('.filter-section');
+    
+    // Get selected star ratings (filter-section index 1)
+    const allStarCheckboxes = filterSections[1].querySelectorAll('input[type="checkbox"]');
+    const starFilters = Array.from(allStarCheckboxes).map((el, i) => el.checked ? (5 - i) : null).filter(Boolean);
+    
+    // Get selected booking features (filter-section index 2)
+    const allFeatureCheckboxes = filterSections[2].querySelectorAll('input[type="checkbox"]');
+    const featureFilters = [];
+    if(allFeatureCheckboxes[0].checked) featureFilters.push('free-cancel');
+    if(allFeatureCheckboxes[1].checked) featureFilters.push('instant-confirm');
+    
+    // Get selected property types (filter-section index 3)
+    const allTypeCheckboxes = filterSections[3].querySelectorAll('input[type="checkbox"]');
+    const typeFilters = [];
+    if(allTypeCheckboxes[0].checked) typeFilters.push('apartment');
+    if(allTypeCheckboxes[1].checked) typeFilters.push('hotel');
+    if(allTypeCheckboxes[2].checked) typeFilters.push('villa');
+    if(allTypeCheckboxes[3].checked) typeFilters.push('hostel');
+    if(allTypeCheckboxes[4]?.checked) typeFilters.push('cottage');
+    
+    // Get selected neighborhoods (filter-section index 4)
+    const allNeighborhoodCheckboxes = filterSections[4].querySelectorAll('input[type="checkbox"]');
+    const neighborhoodFilters = [];
+    if(allNeighborhoodCheckboxes[0].checked) neighborhoodFilters.push('poblacion');
+    if(allNeighborhoodCheckboxes[1].checked) neighborhoodFilters.push('buhangin');
+    if(allNeighborhoodCheckboxes[2].checked) neighborhoodFilters.push('ecoland');
+    if(allNeighborhoodCheckboxes[3].checked) neighborhoodFilters.push('agdao');
+    if(allNeighborhoodCheckboxes[4].checked) neighborhoodFilters.push('lanang');
+    
+    const cards = document.querySelectorAll('.listings .card');
+    let visibleCount = 0;
+    
+    cards.forEach(card => {
+        const price = parseInt(card.dataset.price);
+        const rating = parseInt(card.dataset.rating);
+        const type = card.dataset.type;
+        const features = card.dataset.features;
+        const neighborhood = card.dataset.neighborhood;
+        
+        let showCard = true;
+        
+        // Always check price range
+        if(price < minPrice || price > maxPrice) showCard = false;
+        
+        // Check rating filter (if any selected, card must match)
+        if(showCard && starFilters.length > 0){
+            showCard = starFilters.includes(rating);
+        }
+        
+        // Check features filter (if any selected, card must match)
+        if(showCard && featureFilters.length > 0){
+            showCard = featureFilters.includes(features);
+        }
+        
+        // Check property type filter (if any selected, card must match)
+        if(showCard && typeFilters.length > 0){
+            showCard = typeFilters.includes(type);
+        }
+        
+        // Check neighborhood filter (if any selected, card must match)
+        if(showCard && neighborhoodFilters.length > 0){
+            showCard = neighborhoodFilters.includes(neighborhood);
+        }
+        
+        card.style.display = showCard ? 'block' : 'none';
+        if(showCard) visibleCount++;
+    });
+    
+    // Show/hide no results message
+    let noResultsMsg = document.getElementById('no-results-msg');
+    if(visibleCount === 0){
+        if(!noResultsMsg){
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'no-results-msg';
+            noResultsMsg.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 2rem; color: #999; font-size: 18px;';
+            noResultsMsg.textContent = 'No listings match your filters';
+            document.querySelector('.listings').appendChild(noResultsMsg);
+        }
+        noResultsMsg.style.display = 'block';
+    } else if(noResultsMsg){
+        noResultsMsg.style.display = 'none';
+    }
+}
+
+// Add event listeners to all checkboxes
+document.querySelectorAll('.filter-section input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', filterListings);
+});
+
+// Also listen for any checkbox changes in the future (for dynamically added checkboxes)
+setTimeout(() => {
+    document.querySelectorAll('.filter-section input[type="checkbox"]').forEach(checkbox => {
+        if(!checkbox.hasListener){
+            checkbox.addEventListener('change', filterListings);
+            checkbox.hasListener = true;
+        }
+    });
+}, 100);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../JS/global_auth.js"></script>
+<script src="../JS/dashboard_js.js"></script>
+
+</body>
+</html>

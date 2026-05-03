@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Ohana Rental</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../CSS/account_settings_style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">Ohana Rental</div>
+            <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+            <nav class="desktop-nav">
+                <a href="#listings">Browse Homes</a>
+                <a href="#help">Help Center</a>
+                <a href="#account" class="active">Account Settings</a>
+                <button class="btn-primary" id="logoutBtnDesktop">Log Out</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">×</button>
+        <ul class="mobile-nav-links">
+            <li><a href="#listings">Browse Homes</a></li>
+            <li><a href="#contact">Help Center</a></li>
+            <li><a href="#account">Account Settings</a></li>
+        </ul>
+        <div class="mobile-nav-cta">
+            <a href="#" class="btn-primary" id="logoutBtn">Log Out</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="account-settings-container">
+        <div class="settings-wrapper">
+            <!-- Left Sidebar Navigation -->
+            <aside class="settings-sidebar">
+                <div class="sidebar-title">Account</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#bookings" class="sidebar-link active" data-section="bookings">My Bookings</a></li>
+                    <li><a href="#messages" class="sidebar-link" data-section="messages">Property Messages</a></li>
+                    <li><a href="#saved" class="sidebar-link" data-section="saved">Saved Properties</a></li>
+                    <li><a href="#reviews" class="sidebar-link" data-section="reviews">Reviews</a></li>
+                    <li><a href="#transactions" class="sidebar-link" data-section="transactions">Transactions</a></li>
+                </ul>
+
+                <div class="sidebar-title">Settings</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#profile" class="sidebar-link" data-section="profile">Profile</a></li>
+                    <li><a href="#payment" class="sidebar-link" data-section="payment">Payment Methods</a></li>
+                    <li><a href="#notifications" class="sidebar-link" data-section="notifications">Email Subscriptions</a></li>
+                    <li><a href="#privacy" class="sidebar-link" data-section="privacy">Privacy & Safety</a></li>
+                    <li><a href="#delete" class="sidebar-link" data-section="delete">Delete Account</a></li>
+                </ul>
+            </aside>
+
+            <!-- Right Content Area -->
+            <main class="settings-content">
+                <!-- My Bookings Section -->
+                <section id="bookings" class="content-section active">
+                    <h1>My Bookings</h1>
+                    <div class="bookings-container">
+                        <div class="no-bookings">
+                            <p>You have no ongoing bookings.</p>
+                            <a href="#listings" class="btn-primary">Browse Properties</a>
+                        </div>
+                        <!-- Bookings will appear here -->
+                        <div class="bookings-list" style="display: none;">
+                            <div class="booking-card">
+                                <div class="booking-header">
+                                    <h3>Property Name</h3>
+                                    <span class="booking-status">Confirmed</span>
+                                </div>
+                                <div class="booking-details">
+                                    <p><strong>Check-in:</strong> January 15, 2026</p>
+                                    <p><strong>Check-out:</strong> January 22, 2026</p>
+                                    <p><strong>Total:</strong> $1,200.00</p>
+                                </div>
+                                <div class="booking-actions">
+                                    <button class="btn-secondary">View Details</button>
+                                    <button class="btn-secondary">Cancel Booking</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Property Messages Section -->
+                <section id="messages" class="content-section">
+                    <h1>Property Messages</h1>
+                    <div class="messages-container">
+                        <div class="no-messages">
+                            <p>No messages yet. Start booking to connect with property owners!</p>
+                        </div>
+                        <!-- Messages will appear here -->
+                        <div class="messages-list" style="display: none;">
+                            <div class="message-thread">
+                                <div class="message-header">
+                                    <h4>Owner Name</h4>
+                                    <span class="message-date">Today at 2:30 PM</span>
+                                </div>
+                                <p class="message-text">Thanks for booking! Looking forward to hosting you.</p>
+                                <button class="btn-secondary">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Saved Properties Section -->
+                <section id="saved" class="content-section">
+                    <h1>Saved Properties</h1>
+                    <div class="saved-properties-container">
+                        <div class="no-saved">
+                            <p>You haven't saved any properties yet.</p>
+                            <a href="#listings" class="btn-primary">Explore Properties</a>
+                        </div>
+                        <!-- Saved properties will appear as cards -->
+                    </div>
+                </section>
+
+                <!-- Reviews Section -->
+                <section id="reviews" class="content-section">
+                    <h1>My Reviews</h1>
+                    <div class="reviews-container">
+                        <div class="no-reviews">
+                            <p>You haven't left any reviews yet.</p>
+                            <p class="secondary-text">After your first stay, you'll be able to share your experience.</p>
+                        </div>
+                        <!-- Reviews will appear here -->
+                        <div class="reviews-list" style="display: none;">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <h4>Beautiful Beachfront Villa</h4>
+                                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                                </div>
+                                <p class="review-text">Amazing stay! The property was exactly as described.</p>
+                                <p class="review-date">Stayed January 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Section -->
+                <section id="transactions" class="content-section">
+                    <h1>Transactions</h1>
+                    <div class="transactions-container">
+                        <div class="transactions-filters">
+                            <input type="date" class="filter-input" placeholder="From Date">
+                            <input type="date" class="filter-input" placeholder="To Date">
+                            <select class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="booking">Booking</option>
+                                <option value="refund">Refund</option>
+                                <option value="payment">Payment</option>
+                            </select>
+                        </div>
+                        <div class="no-transactions">
+                            <p>No transactions found.</p>
+                        </div>
+                        <!-- Transactions will appear as a list -->
+                        <div class="transactions-list" style="display: none;">
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <p class="transaction-type">Booking Payment</p>
+                                    <p class="transaction-date">January 10, 2026</p>
+                                </div>
+                                <p class="transaction-amount">-$1,200.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="content-section">
+                    <h1>Profile</h1>
+                    <div class="profile-container">
+                        <div class="profile-picture-section">
+                            <div class="profile-picture">
+                                <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                            </div>
+                            <button class="btn-secondary">Change Photo</button>
+                        </div>
+
+                        <form class="profile-form">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <div class="form-input-wrapper">
+                                    <input type="text" class="form-input" value="John Doe" disabled>
+                                    <button type="button" class="btn-edit" data-field="name">Edit</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="form-input-wrapper">
+                                    <input type="email" class="form-input" value="john@example.com" disabled>
+                                    <span class="verification-badge verified">✓ VERIFIED</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <div class="form-input-wrapper">
+                                    <input type="tel" class="form-input" value="+1 (555) 123-4567" disabled>
+                                    <button type="button" class="btn-secondary" data-field="phone">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password</label>
+                                <div class="form-input-wrapper">
+                                    <input type="password" class="form-input" value="●●●●●●●●●●" disabled>
+                                    <button type="button" class="btn-secondary" data-field="password">Edit</button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary" style="display: none;">Save Changes</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Payment Methods Section -->
+                <section id="payment" class="content-section">
+                    <h1>Payment Methods</h1>
+                    <div class="payment-container">
+                        <div class="saved-cards">
+                            <h3>Saved Cards</h3>
+                            <div class="no-cards">
+                                <p>No saved payment methods</p>
+                            </div>
+                            <!-- Cards will appear here -->
+                            <div class="cards-list" style="display: none;">
+                                <div class="payment-card">
+                                    <div class="card-info">
+                                        <p class="card-type">Visa</p>
+                                        <p class="card-number">**** **** **** 4242</p>
+                                        <p class="card-expiry">Expires 12/25</p>
+                                    </div>
+                                    <div class="card-actions">
+                                        <label class="checkbox-label">
+                                            <input type="radio" name="default-card">
+                                            <span>Set as default</span>
+                                        </label>
+                                        <button class="btn-delete">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="add-payment">
+                            <h3>Add Payment Method</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label>Card Holder Name</label>
+                                    <input type="text" class="form-input" placeholder="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Expiry Date</label>
+                                        <input type="text" class="form-input" placeholder="MM/YY">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CVV</label>
+                                        <input type="text" class="form-input" placeholder="123">
+                                    </div>
+                                </div>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span>Save this payment method</span>
+                                </label>
+                                <button type="submit" class="btn-primary">Add Card</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Email Subscriptions Section -->
+                <section id="notifications" class="content-section">
+                    <h1>Email Subscriptions</h1>
+                    <div class="subscriptions-container">
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h3>Newsletter</h3>
+                                <p>Stay updated with the latest properties and offers</p>
+                            </div>
+                            <div class="subscription-options">
+                                <label class="radio-label">
+                                    <input type="radio" name="newsletter" value="daily" checked>
+                                    <span>Daily</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="newsletter" value="twice-weekly">
+                                    <span>Twice a Week</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="newsletter" value="weekly">
+                                    <span>Weekly</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="newsletter" value="never">
+                                    <span>Never</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h3>Booking Assistance Reminders</h3>
+                                <p>Get reminders about your upcoming bookings</p>
+                            </div>
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle-switch"></span>
+                                <span class="toggle-text">Yes</span>
+                            </label>
+                        </div>
+
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h3>Ohana Promotions</h3>
+                                <p>Exclusive deals and special offers</p>
+                            </div>
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle-switch"></span>
+                                <span class="toggle-text">Yes</span>
+                            </label>
+                        </div>
+
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h3>Trip Information & Offers</h3>
+                                <p>Information and offers related to your upcoming trips</p>
+                            </div>
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle-switch"></span>
+                                <span class="toggle-text">Yes</span>
+                            </label>
+                        </div>
+
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h3>Reviews & Ratings Request</h3>
+                                <p>Request to review properties you've stayed at</p>
+                            </div>
+                            <label class="toggle-label">
+                                <input type="checkbox" checked>
+                                <span class="toggle-switch"></span>
+                                <span class="toggle-text">Yes</span>
+                            </label>
+                        </div>
+
+                        <button class="btn-primary">Save Preferences</button>
+                    </div>
+                </section>
+
+                <!-- Privacy & Safety Section -->
+                <section id="privacy" class="content-section">
+                    <h1>Privacy & Safety</h1>
+                    <div class="privacy-container">
+                        <div class="privacy-item">
+                            <h3>Login Activity</h3>
+                            <p>View your login history and manage active sessions</p>
+                            <button class="btn-secondary">View Activity</button>
+                        </div>
+
+                        <div class="privacy-item">
+                            <h3>Two-Factor Authentication</h3>
+                            <p>Add an extra layer of security to your account</p>
+                            <button class="btn-secondary">Set Up 2FA</button>
+                        </div>
+
+                        <div class="privacy-item">
+                            <h3>Privacy Settings</h3>
+                            <p>Control who can see your profile and information</p>
+                            <button class="btn-secondary">Manage Privacy</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Delete Account Section -->
+                <section id="delete" class="content-section">
+                    <h1>Delete Account</h1>
+                    <div class="delete-container">
+                        <div class="delete-warning">
+                            <h3>⚠️ Danger Zone</h3>
+                            <p>Deleting your account is permanent and cannot be undone. All your data, bookings history, and reviews will be deleted.</p>
+                        </div>
+                        <div class="delete-actions">
+                            <button class="btn-danger">Delete My Account</button>
+                            <button class="btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../JS/account_settings_js.js"></script>
+</body>
+</html>

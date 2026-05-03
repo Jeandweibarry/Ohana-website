@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Your Ohana Account</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background:#FFFBF5;font-family:'DM Sans',Arial,sans-serif;color:#1C1C1C;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#FFFBF5;padding:24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:620px;background:#FEFCF9;border:1px solid #E7DFD1;">
+          <tr>
+            <td style="padding:28px 28px 18px 28px;background:#FEFCF9;border-bottom:1px solid #EFE6D8;">
+              <div style="font-family:'Uncial Antiqua',Georgia,'Times New Roman',serif;font-size:34px;line-height:1.1;color:#0D3678;letter-spacing:0.5px;">
+                ohana
+                <span style="color:#1C1C1C;font-size:22px;font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;"> Web Reservation</span>
+              </div>
+              <p style="margin:14px 0 0 0;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#4470B8;">
+                Verify Your Email Address
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:26px 28px 30px 28px;">
+              <h1 style="margin:0 0 14px 0;font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:30px;line-height:1.2;font-weight:500;color:#1C1C1C;">
+                Welcome to Ohana
+              </h1>
+
+              <p style="margin:0 0 14px 0;font-size:16px;line-height:1.7;color:#2A2A2A;">
+                Thanks for signing up. Please confirm your email to activate your account and start browsing homes.
+              </p>
+
+              <p style="margin:0 0 24px 0;font-size:16px;line-height:1.7;color:#2A2A2A;">
+                This link is unique to you and helps keep your account secure.
+              </p>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+                <tr>
+                  <td align="center" style="background:#0D3678;">
+                    <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;color:#FEFCF9;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">
+                      Confirm My Email
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 8px 0;font-size:14px;line-height:1.6;color:#4B4B4B;">
+                If the button does not work, copy and paste this link into your browser:
+              </p>
+              <p style="margin:0;font-size:13px;line-height:1.6;word-break:break-all;color:#0D3678;">
+                {{ .ConfirmationURL }}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:18px 28px 24px 28px;border-top:1px solid #EFE6D8;background:#FBF7F0;">
+              <p style="margin:0;font-size:12px;line-height:1.6;color:#6A6A6A;">
+                You are receiving this email because an account was created on Ohana Web Reservation.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

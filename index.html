@@ -3,53 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/resources/images/logo_no_text.png">
     <title>Home - Ohana Web Reservation</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/style.css">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header" id="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="#" class="logo"><span>Ohana</span> Web Reservation</a>
-                
-                <nav class="nav-main">
-                    <a href="#listings">Browse Homes</a>
-                    <a href="#story">How It Works</a>
-                    <a href="#host">Become a Host</a>
-                    <a href="#contact">Help Center</a>
-                    <a href="#contact" class="nav-cta" id="signupBtn">Sign In</a>
-                </nav>
-                
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- File Imports -->
+    <script src="/supabase_config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/resources/common/global_auth.js"></script>
+    <script src="/resources/common/modal_handler.js"></script>
+    <script src="/resources/common/searchbar_js.js"></script>
+    <script src="/resources/JS/index_js.js"></script>
     
-    <!-- Mobile Navigation -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <nav class="mobile-nav" id="mobileNav">
-        <button class="mobile-nav-close" id="mobileNavClose">×</button>
-        <ul class="mobile-nav-links">
-            <li><a href="#listings">Browse Homes</a></li>
-            <li><a href="#story">How It Works</a></li>
-            <li><a href="#host">Become a Host</a></li>
-            <li><a href="#contact">Help Center</a></li>
-        </ul>
-        <div class="mobile-nav-cta">
-            <a href="#contact" class="btn-primary">Book Appointment</a>
-        </div>
-    </nav>
+    <!-- Common Header -->
+    <div id="commonHeader"></div>
+    <script>
+        $(async function() {
+            const { data: { session } } = await window.supabaseClient.auth.getSession();
+            const headerFile = session
+                ? "/resources/common/header_loggedin.html"
+                : "/resources/common/header_notloggedin.html";
+
+            $("#commonHeader").load(headerFile, function() {
+                if (session && typeof loadUserData === "function") {
+                    loadUserData();
+                }
+                if (typeof initSearch === "function") {
+                    initSearch();
+                }
+            });
+        });
+    </script>
+    <!-- End of Common Header -->
+
     
     <!-- Hero Section -->
     <section class="hero">
@@ -70,15 +65,15 @@
         </div>
         <div class="hero-image">
             <div class="hero-slide active" data-title="Mountain Cabin" data-price="From ₱4,500/night">
-                <img src="../resources/images/maison-hero-01.jpg" 
+                <img src="/resources/images/maison-hero-01.jpg" 
                      alt="Cozy mountain cabin retreat">
             </div>
             <div class="hero-slide" data-title="Beachfront Villa" data-price="From ₱12,500/night">
-                <img src="../resources/images/maison-hero-02.jpg" 
+                <img src="/resources/images/maison-hero-02.jpg" 
                      alt="Luxury beachfront villa">
             </div>
             <div class="hero-slide" data-title="City Loft" data-price="From ₱6,000/night">
-                <img src="../resources/images/maison-hero-03.jpg" 
+                <img src="/resources/images/maison-hero-03.jpg" 
                      alt="Modern city loft apartment">
             </div>
             <div class="hero-image-overlay">
@@ -94,7 +89,7 @@
             <div class="featured-grid">
                 <div class="featured-image-wrapper">
                     <div class="featured-image">
-                        <img src="../resources/images/maison-hero-02.jpg" 
+                        <img src="/resources/images/maison-hero-02.jpg" 
                              alt="Stunning beachfront villa">
                     </div>
                     <div class="featured-badge">Superhost</div>
@@ -147,7 +142,7 @@
             <div class="collections-grid">
                 <div class="collection-item">
                     <div class="collection-image">
-                        <img src="../resources/images/maison-hero-03.jpg" 
+                        <img src="/resources/images/maison-hero-03.jpg" 
                              alt="Entire homes and apartments">
                     </div>
                     <div class="collection-overlay">
@@ -158,7 +153,7 @@
                 
                 <div class="collection-item">
                     <div class="collection-image">
-                        <img src="../resources/images/maison-doree-01.jpg" 
+                        <img src="/resources/images/maison-doree-01.jpg" 
                              alt="Unique stays and experiences">
                     </div>
                     <div class="collection-overlay">
@@ -169,7 +164,7 @@
                 
                 <div class="collection-item">
                     <div class="collection-image">
-                        <img src="../resources/images/maison-doree-02.jpg" 
+                        <img src="/resources/images/maison-doree-02.jpg" 
                              alt="Cabins and cottages">
                     </div>
                     <div class="collection-overlay">
@@ -180,7 +175,7 @@
                 
                 <div class="collection-item">
                     <div class="collection-image">
-                        <img src="../resources/images/maison-doree-03.jpg" 
+                        <img src="/resources/images/maison-doree-03.jpg" 
                              alt="Luxury retreats">
                     </div>
                     <div class="collection-overlay">
@@ -191,7 +186,7 @@
                 
                 <div class="collection-item">
                     <div class="collection-image">
-                        <img src="../resources/images/maison-doree-04.jpg" 
+                        <img src="/resources/images/maison-doree-04.jpg" 
                              alt="Pet-friendly homes">
                     </div>
                     <div class="collection-overlay">
@@ -200,6 +195,9 @@
                     </div>
                 </div>
             </div>
+
+            <div class="host-listings" id="publicListingsContainer" style="display: none;"></div>
+            
         </div>
     </section>
     
@@ -235,11 +233,11 @@
                 </div>
                 <div class="story-images">
                     <div class="story-image">
-                        <img src="../resources/images/maison-doree-05.jpg" 
+                        <img src="/resources/images/maison-doree-05.jpg" 
                              alt="Happy travelers meeting their hosts">
                     </div>
                     <div class="story-image">
-                        <img src="../resources/images/maison-doree-06.jpg" 
+                        <img src="/resources/images/maison-doree-06.jpg" 
                              alt="Diverse accommodation options worldwide">
                     </div>
                 </div>
@@ -272,7 +270,7 @@
                 </div>
                 <div class="craft-image-wrapper">
                     <div class="craft-image">
-                        <img src="../resources/images/maison-doree-07.jpg" 
+                        <img src="/resources/images/maison-doree-07.jpg" 
                              alt="Hosts welcoming guests to their homes">
                     </div>
                     <div class="craft-stats">
@@ -313,7 +311,7 @@
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="../resources/images/avatar-01.jpg" alt="Maria Santos">
+                            <img src="/resources/images/avatar-01.jpg" alt="Maria Santos">
                         </div>
                         <div class="testimonial-info">
                             <p class="testimonial-name">Maria S.</p>
@@ -331,7 +329,7 @@
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="../resources/images/avatar-02.jpg" alt="Carlos Mendoza">
+                            <img src="/resources/images/avatar-02.jpg" alt="Carlos Mendoza">
                         </div>
                         <div class="testimonial-info">
                             <p class="testimonial-name">Carlos M.</p>
@@ -349,7 +347,7 @@
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
-                            <img src="../resources/images/avatar-03.jpg" alt="Anna Reyes">
+                            <img src="/resources/images/avatar-03.jpg" alt="Anna Reyes">
                         </div>
                         <div class="testimonial-info">
                             <p class="testimonial-name">Anna R.</p>
@@ -361,209 +359,26 @@
         </div>
     </section>
     
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-content">
-                    <p class="text-label">Get in Touch</p>
-                    <h2 class="heading-display contact-title">
-                        We're Here to Help
-                    </h2>
-                    <p class="text-body contact-text">
-                        Have questions about booking, hosting, or need support? 
-                        Our customer service team is available 24/7 to assist you. 
-                        Get started with your next adventure today.
-                    </p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <p class="contact-item-label">Headquarters</p>
-                            <p class="contact-item-value">
-                                123 Makati Avenue, BGC<br>
-                                Taguig City, Metro Manila 1634
-                            </p>
-                        </div>
-                        <div class="contact-item">
-                            <p class="contact-item-label">Support Hours</p>
-                            <p class="contact-item-value">
-                                24/7 Customer Support
-                            </p>
-                        </div>
-                        <div class="contact-item">
-                            <p class="contact-item-label">Contact</p>
-                            <p class="contact-item-value">
-                                <a href="tel:+63288881234">+63 (2) 8888-1234</a><br>
-                                <a href="mailto:help@ohanarental-web.ph">help@ohanarental-web.ph</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form-wrapper">
-                    <h3 class="form-title">Send us a Message</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Full Name</label>
-                            <input type="text" id="name" name="name" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-input">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message">How can we help?</label>
-                            <textarea id="message" name="message" class="form-textarea" 
-                                placeholder="Questions about booking? Hosting inquiries? General feedback?"></textarea>
-                        </div>
-                        <button type="submit" class="form-submit">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Help Section -->
+    <script> $(function(){$("#helpSection").load("/resources/common/get_in_touch.html"); });</script> 
+    <div id="helpSection"></div>
     
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Column 1: Brand & Contact -->
-                <div class="footer-brand">
-                    <p class="footer-logo"><span>Ohana</span> Web Reservation</p>
-                    <p class="footer-tagline">
-                        Connecting travelers with unique accommodations across the Philippines. 
-                        Find your perfect stay with local hosts.
-                    </p>
-                    <div class="footer-contact-info">
-                        <p>123 Makati Avenue, BGC</p>
-                        <p>Taguig City, Metro Manila 1634</p>
-                        <p><a href="tel:+63288881234">+63 (2) 8888-1234</a></p>
-                        <p><a href="mailto:help@ohana.ph">help@ohana.ph</a></p>
-                    </div>
-                </div>
-                
-                <!-- Column 2: Quick Links -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Browse</h4>
-                    <ul class="footer-links">
-                        <li><a href="#listings">All Listings</a></li>
-                        <li><a href="#">Entire Homes</a></li>
-                        <li><a href="#">Unique Stays</a></li>
-                        <li><a href="#">Cabins & Cottages</a></li>
-                        <li><a href="#">Pet Friendly</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 3: Company -->
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#story">How It Works</a></li>
-                        <li><a href="#host">Become a Host</a></li>
-                        <li><a href="#contact">Help Center</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 4: Support -->
-                <div class="footer-column footer-about">
-                    <h4 class="footer-column-title">Support</h4>
-                    <p>
-                        24/7 customer support available in English and Filipino.
-                    </p>
-                    <p>
-                        <a href="#contact">Contact Us</a> • <a href="#">Trust & Safety</a>
-                    </p>
-                    <p>
-                        <a href="#">Host Resources</a> • <a href="#">Community</a>
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2026 Ohana Web Reservation. Connecting travelers across the Philippines.</p>
-                <div class="footer-social">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <script> $(function(){$("#commonFooter").load("/resources/common/footer.html"); });</script> 
+    <div id="commonFooter"></div>
 
-    <!-- Auth Modal -->
-    <div id="authModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            
-            <!-- Login Form -->
-            <div id="loginForm" class="auth-form active">
-                <h2>Welcome Back</h2>
-                <p>Sign in to your Ohana account</p>
-                
-                <form id="loginFormElement">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" name="password" required>
-                    </div>
-                    
-                    <button type="submit" class="auth-btn">Sign In</button>
-                </form>
-                
-                <p class="auth-switch">
-                    Don't have an account? 
-                    <a href="#" id="showSignup">Sign up</a>
-                </p>
-            </div>
-            
-            <!-- Signup Form -->
-            <div id="signupForm" class="auth-form">
-                <h2>Join Ohana</h2>
-                <p>Create your account to start booking or hosting</p>
-                
-                <form id="signupFormElement">
-                    <div class="form-group">
-                        <label for="signupUsername">Username</label>
-                        <input type="text" id="signupUsername" name="username" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="signupEmail">Email</label>
-                        <input type="email" id="signupEmail" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" name="password" required minlength="8">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="signupConfirmPassword">Confirm Password</label>
-                        <input type="password" id="signupConfirmPassword" name="confirmPassword" required minlength="8">
-                    </div>
-                    
-                    <button type="submit" class="auth-btn">Create Account</button>
-                </form>
-                
-                <p class="auth-switch">
-                    Already have an account? 
-                    <a href="#" id="showLogin">Sign in</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <!-- Login Modal -->
 
-    <script src="/resources/JS/home_login.js"></script>
+    <div id="commonAuthModal"></div>
+    <script> 
+        $(function(){
+            $("#commonAuthModal").load("/resources/common/auth_modal.html", function() {
+                if (typeof window.initializeAuthEvents === 'function') {
+                    window.initializeAuthEvents();
+                }
+            }); 
+        });
+    </script>
+    
 </body>
 </html>

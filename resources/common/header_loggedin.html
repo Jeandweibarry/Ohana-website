@@ -1,0 +1,50 @@
+<!-- Header -->
+<header class="site-header" id="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="/index" class="logo"><span>ohana</span><span class="logo-text"> Web Reservation</span></a>
+            <div class="search-container">
+                <input type="search" placeholder="Search places or cities..." class="search-bar" id="searchBar">
+                <button type="button" class="search-btn" aria-label="Search"></button>
+                <a href="/advanced_search" class="advanced-search-link">Advanced Search</a>
+            </div>
+            <nav class="nav-main" id="userGreetingNav">
+                <a href ="#" id="userGreeting">Welcome, <span>Username</span></a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <a><img src="/resources/images/default_pic.jpg" id="user_pic"></a>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Navigation -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose">×</button>
+    <div class="mobile-nav-header">
+        <img src="/resources/images/default_pic.jpg" id="user_pic_mobile" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+        <div class="user-text-container">
+            <div class="mobile-user-identity-row">
+                <p id="mobileUserGreeting">Username</p>
+                <a id="mobileUserVerificationLink" href="/account_settings#privacy" aria-label="Open privacy settings">
+                    <img id="mobileUserVerificationIcon" src="/resources/images/unverified.png" alt="Verification status" class="mobile-user-verify-icon" title="Unverified Account">
+                </a>
+            </div>
+            <p id="mobileUserFullName" class="mobile-user-fullname" style="display: none;"></p>
+            <a href="/account_settings#profile" id="mobileAccountSettings">Edit Profile</a>
+        </div>
+    </div>
+    <div class="mobile-search-container">
+        <input type="search" placeholder="Search places or cities..." class="mobile-search-bar" id="mobileSearchBar">
+        <a href="/advanced_search" class="mobile-advanced-search-link">Advanced Search</a>
+    </div>
+    <ul class="mobile-nav-links">
+        <li><a href="#listings">Browse Homes</a></li>
+        <li><a href="/messages">Messages</a></li>
+        <li><a href="#contact">Help Center</a></li>
+        <li><a href="/account_settings">Account Settings</a></li> </ul>
+    <div class="mobile-nav-cta">
+        <a href="#" class="btn-primary" id="logoutBtn">Log Out</a>
+    </div>
+</nav>
