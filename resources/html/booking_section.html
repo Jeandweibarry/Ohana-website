@@ -76,7 +76,13 @@
     </style>
     <!-- Common Header -->
     <div id="commonHeader"></div>
-    <script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/resources/common/global_auth.js"></script>
+    <script src="/resources/common/searchbar_js.js"></script>
+    <script src="/resources/common/icon_menu_js.js"></script> 
+    <script src="/resources/JS/booking_section_js.js"></script>
+    <script>    
         $(async function(){
             const { data: { session } } = await window.supabaseClient.auth.getSession();
             const headerFile = session ? "/resources/common/header_loggedin.html" : "/resources/common/header_notloggedin.html";
@@ -339,12 +345,6 @@
         const mobileOverlay = document.getElementById('mobileOverlay');
         const mobileNav = document.getElementById('mobileNav');
     });
-    // Add more JS functions as needed for your listings
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/resources/common/global_auth.js"></script>
-    <script src="/resources/common/searchbar_js.js"></script>
-    <script src="/resources/common/icon_menu_js.js"></script> 
-    <script src="/resources/JS/booking_section_js.js"></script>
 </body>
 </html>

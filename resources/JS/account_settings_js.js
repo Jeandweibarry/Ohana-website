@@ -803,6 +803,15 @@ function injectAccountSettingsStyles() {
     document.head.appendChild(styleSheet);
 }
 
+function setUp2FA(){
+    if (document.getElementById("setup-2fa-btn")) {
+        const setup2FABtn = document.getElementById("setup-2fa-btn");
+        setup2FABtn.addEventListener("click", () => {
+            window.location.href = "/2fa-setup";
+        });
+    }
+}
+
 
 injectAccountSettingsStyles();
 
